@@ -16,7 +16,7 @@
 #   Contacto : toccicristian@hotmail.com / toccicristian@protonmail.ch
 
 
-#pitsydub3.py archivo.mp3 [longitud minima de silencio]
+#watxt.py archivo.mp3 [longitud minima de silencio]
 
 
 import shutil
@@ -31,7 +31,7 @@ from pydub import AudioSegment
 from pydub.silence import split_on_silence
 
 licencias = dict()
-licencias['gplv3'] = """    pitsydub.py  Copyright (C) 2023  Cristian Tocci
+licencias['gplv3'] = """    watxt.py  Copyright (C) 2023  Cristian Tocci
     This program comes with ABSOLUTELY NO WARRANTY; for details press 'w'.
     This is free software, and you are welcome to redistribute it
     under certain conditions; See COPYING.odt file for further details.

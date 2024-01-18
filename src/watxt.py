@@ -97,7 +97,7 @@ ayuda = f"""
     {sys.argv[0]} transcribe un mp3 inteligible en un txt.
 
     SINTAXIS:
-    {sys.argv[0]} archivo.mp3
+    {sys.argv[0]} archivo.mp3/.ogg
 
     {sys.argv[0]} -h/--help/--ayuda     imprime esta ayuda
 
@@ -157,12 +157,33 @@ if len(sys.argv)>2 and es_entero(sys.argv[2]):
     minsilencelen=int(sys.argv[2])
 
 
-#convertir mp3 a wav
+#Chequeo si la extension del archivo esta permitida:
+extension_valida = False
+extensiones_permitidas=['.mp3','.ogg']
+for extension in extensiones_permitidas:
+    if str(INPUTFILE).rstrip().endswith(extension):
+        extension_valida = True
+
+if not extension_valida:
+    print("La extension del archivo no esta permitida. \nExtensiones permitidas:",end='',flush=True)
+    for extension in extensiones_permitidas:
+        print(extension, end='')
+        print("")
+        sys.exit()
+
+#si la extension es ogg lo cargo con "from_ogg"
 log("Generando archivo wav...")
-sound = AudioSegment.from_mp3(INPUTFILE)
+if str(INPUTFILE).rstrip().endswith(".ogg"):
+    sound = AudioSegment.from_ogg(INPUTFILE)
+
+#si la extension es mp3 lo cargo con "from_mp3"
+if str(INPUTFILE).rstrip().endswith(".mp3"):
+    sound = AudioSegment.from_mp3(INPUTFILE)
+
+#convierto el archivo cargado a wav
 sound.export(f'{AUDIO_FILE}', format="wav")
 
-#transcribe audio file
+#transcribo AUDIO_FILE
 sound = AudioSegment.from_wav(AUDIO_FILE)
 
 log("Dividiendo en chunks (esto puede tardar): ", end='')

@@ -1,5 +1,5 @@
 # WATXT
-Transcribe mensajes de voz en ".mp3" a ".txt"
+Transcribe mensajes de voz en ".ogg" o ".mp3" a ".txt"
 
 # Software requerido:
 
